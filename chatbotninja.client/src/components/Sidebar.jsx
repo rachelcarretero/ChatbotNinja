@@ -1,5 +1,13 @@
+// modules 
+import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Box } from '@mui/material';
+
+// styles
+
 import styled from "styled-components"
-import logo from "../assets/images/chatbot_titulo.png"
+import logo from "../assets/branding/chatbot_titulo.png"
 import { v } from "../styles/Variables";
 import {
     AiOutlineLeft,
@@ -7,10 +15,7 @@ import {
     AiOutlineApartment,
     AiOutlineSetting,
 } from "react-icons/ai";
-import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 
-import { NavLink } from "react-router-dom";
-import { useContext } from "react";
 import { ThemeContext } from "../App";
 import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,71 +31,79 @@ export function SideBar({ sidebarOpen, setSidebarOpen }) {
 
     return <>
 
-        <Container >
-            <button className="Sidebarbutton" onClick={ModSidebaropen}>
+          
+ 
+            <button className="layout-menu-toggle menu-link text-large ms-auto" onClick={ModSidebaropen}>
                 <AiOutlineLeft />
             </button>
-            <div className="Logocontent">
-                <div className="imgcontent">
-                    <img src={logo} />
-                </div>
-        
+            <div className="app-brand demo">
+                <a href="/" className="app-brand-link">
+                    <span className="app-brand-logo demo">
+                        <img src={logo} alt="ChatbotNinja" />
+                    </span>
+                </a>
             </div>
+
+            <ul className="menu-inner py-1 ps ps--active-y">
+                {linksArray.map(({ icon, label, to }) => (
+                    <li className="menu-item"      key={label}>
+                        <NavLink
+                            to={to}
+                            className={({ isActive }) => `menu-link${isActive ? ` active` : ``}`}
+                        >
+                            <div className="menu-icon bx bx-target-lock">{icon}</div>
+                            {sidebarOpen && <span>{label}</span>}
+                        </NavLink>
+                    </li>
+                ))}
+            </ul>
             <Divider />
-            {linksArray.map(({ icon, label, to }) => (
-                <div className="LinkContainer" key={label}>
-                    <NavLink
-                        to={to}
-                        className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
-                    >
-                        <div className="Linkicon">{icon}</div>
-                        {sidebarOpen && <span>{label}</span>}
-                    </NavLink>
-                </div>
-            ))}
-            <Divider />
+            <ul className="menu-inner py-1 ps ps--active-y">
             {secondarylinksArray.map(({ icon, label, to }) => (
-                <div className="LinkContainer" key={label}>
+                <div className="menu-item" key={label}>
                     <NavLink
                         to={to}
-                        className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
+                        className={({ isActive }) => `menu-link${isActive ? ` active` : ``}`}
                     >
-                        <div className="Linkicon">{icon}</div>
+                        <div className="menu-icon bx bx-target-lock">{icon}</div>
                         {sidebarOpen && <span>{label}</span>}
                     </NavLink>
                 </div>
             ))}
-            <Divider />
-        </Container>
+            </ul>
+            
+        
+        
     </>
 }
 
 //#region Data links
 const linksArray = [
     {
-        label: "Home",
+        label: "Dashboard",
         icon: <AiOutlineHome />,
         to: "/",
     },
     {
-        label: "Estadisticas",
+        label: "Characters",
         icon: <MdOutlineAnalytics />,
-        to: "/estadisticas",
+        to: "/characters",
     },
     {
-        label: "Productos",
+        label: "Template Roles",
         icon: <AiOutlineApartment />,
-        to: "/productos",
+        to: "/templateroles",
     },
     {
-        label: "Diagramas",
+        label: "Personalities And Trails",
         icon: <MdOutlineAnalytics />,
-        to: "/diagramas",
+        to: "/personalitiesandtrails",
     },
+ 
     {
-        label: "Reportes",
+        label: "Instructions",
         icon: <MdOutlineAnalytics />,
-        to: "/reportes",
+        to: "/instructions",
     },
     {
         label: "Weather API",

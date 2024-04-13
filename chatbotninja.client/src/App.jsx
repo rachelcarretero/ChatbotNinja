@@ -1,16 +1,22 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+
+// components
+import { Container, Nav } from 'react-bootstrap';
 import { MyRoutes } from './routes';
 import { BrowserRouter } from 'react-router-dom';
-import { Light, Dark } from "./styles/Themes";
-
-import { ThemeProvider } from "styled-components";
 import { SideBar } from './components/Sidebar';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
-import dashboard from './assets/images/chatbot_logo.png';
+// styles
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/themedefault.css';
+
+import { Light, Dark } from "./styles/Themes";
+import { ThemeProvider } from "styled-components";
+import { Box } from '@mui/material';
+import HeaderBar from './components/Header';
+import NavbarUser from './components/NavbarUser';
 
 export const ThemeContext = React.createContext(null);
 
@@ -55,23 +61,28 @@ function App() {
             <ThemeContext.Provider value={{ setTheme, theme }}>
                 <ThemeProvider theme={themeStyle}>
                     <BrowserRouter>
-                        <Container>
-                            <h5 id="tabelLabel">ChatbotNinja</h5>
-                            <p>This component demonstrates fetching data from the server.</p>
 
-
-                            <div className='container '>
-
-                            <img src={dashboard} />
-                            </div>
+                        <Box sx={{ p: 2, border: '1px solid blue' }} className='layout-menu menu-vertical menu '  >
                             <SideBar
                                 sidebarOpen={sidebarOpen}
                                 setSidebarOpen={setSidebarOpen}
                             />
+                        </Box>
+                        <Box sx={{ p: 2, border: '1px solid red' }} className='layout-page'  >
+                            <NavbarUser />
 
+                            {/* paginas */}
+                            <Box className="content-wrapper">
+                                <Box className="container-xxl flex-grow-1 container-p-y">
 
-                            <MyRoutes />
-                        </Container>
+                                    <PerfectScrollbar>
+                                        <MyRoutes />
+                                    </PerfectScrollbar>
+                                </Box>
+                            </Box>
+
+                        </Box>
+
                     </BrowserRouter>
                 </ThemeProvider>
             </ThemeContext.Provider>

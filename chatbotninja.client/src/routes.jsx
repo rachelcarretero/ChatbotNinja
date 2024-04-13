@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Estadisticas } from "./pages/Estadisticas";
-import { Productos } from "./pages/Productos";
-import {Diagramas} from "./pages/Diagramas";
-import {Reportes} from "./pages/Reportes";
+import { Dashboard } from "./pages/Dashboard";
+import { Characters } from "./pages/Characters";
+import { PersonalitiesAndTrails } from "./pages/PersonalitiesAndTrails";
+import { Instructions } from "./pages/Instructions";
+import { TemplateRoless } from "./pages/TemplateRoles";
+
 import {Weather} from "./pages/wheather";
 
 export function MyRoutes() {
@@ -11,11 +12,12 @@ export function MyRoutes() {
    
      
       <Routes>
-        <Route path="/" element={<Home />} >sdf</Route>
-        <Route path="/productos" element={<Productos />} />
-        <Route path="/estadisticas" element={<Estadisticas />} />
-        <Route path="/diagramas" element={<Diagramas />} />
-        <Route path="/reportes" element={<Reportes />} />
+        <Route path="/" element={<Dashboard />} ></Route>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/characters" element={<Characters />} />
+        <Route path="/templateroles" element={<TemplateRoless />} />
+        <Route path="/personalitiesandtrails" element={<PersonalitiesAndTrails />} />
+        <Route path="/Instructions" element={<Instructions />} />
         <Route path="/wheather" element={<Weather />} />
       </Routes>
     
