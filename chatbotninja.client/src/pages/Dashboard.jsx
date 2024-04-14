@@ -8,7 +8,7 @@ import { Box } from '@mui/material';
 //styles
 import dashboard from '../assets/branding/chatbot_logo.png';
 import HeaderBar from '../components/Header';
-
+import '../styles/chatbot.css';
 
 
 export function Dashboard() {
@@ -16,15 +16,13 @@ export function Dashboard() {
 
     <Box>
 
-      <h4 id="tabelLabel">ChatbotNinja</h4>
-      <p>This component demonstrates fetching data from the server.</p>
-
- {/* todo:ver como pasar por param 
-      <HeaderBar   /> */}
-      <div className='container '>
-
-        <img src={dashboard} />
-      </div>
+      <HeaderBar
+        title="ChatbotNinja"
+        subtitle="Dashboard Page"
+      />
+      <Box clasName="container" >
+        <img src={dashboard}  />
+      </Box>
 
     </Box>
 

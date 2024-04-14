@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -41,22 +42,22 @@ export function Weather() {
     return (
         <>
 
-            <Container>
+            <Box>
+
                 <h4 id="tabelLabel">Weather forecast</h4>
                 <p>This component demonstrates fetching data from the server.</p>
                 {contents}
 
-            </Container>
+            </Box>
 
         </>
     );
 
     async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
+        const response = await fetch('/api/weatherforecast');
+         const data = await response.json();
         setForecasts(data);
     }
 
 }
 
- 

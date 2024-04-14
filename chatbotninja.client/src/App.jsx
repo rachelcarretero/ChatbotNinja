@@ -1,22 +1,20 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // components
-import { Container, Nav } from 'react-bootstrap';
-import { MyRoutes } from './routes';
-import { BrowserRouter } from 'react-router-dom';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import { SideBar } from './components/Sidebar';
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import { MyRoutes } from './routes';
 
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/themedefault.css';
 
-import { Light, Dark } from "./styles/Themes";
+import { Box, CssBaseline } from '@mui/material';
 import { ThemeProvider } from "styled-components";
-import { Box } from '@mui/material';
-import HeaderBar from './components/Header';
+import Footer from './components/Footer';
 import NavbarUser from './components/NavbarUser';
+import { Dark, Light } from "./styles/Themes";
+import Topbar from './components/Topbar';
 
 export const ThemeContext = React.createContext(null);
 
@@ -25,65 +23,38 @@ function App() {
     const themeStyle = theme === "light" ? Light : Dark;
 
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [isSidebar, setIsSidebar] = useState(true);
 
-
-    const [forecasts, setForecasts] = useState();
-
-    useEffect(() => {
-        populateWeatherData();
-    }, []);
-
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tabelLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
 
     return (
         <>
             <ThemeContext.Provider value={{ setTheme, theme }}>
                 <ThemeProvider theme={themeStyle}>
-                    <BrowserRouter>
+                    <CssBaseline />
 
-                        <Box sx={{ p: 2, border: '1px solid blue' }} className='layout-menu menu-vertical menu '  >
-                            <SideBar
-                                sidebarOpen={sidebarOpen}
-                                setSidebarOpen={setSidebarOpen}
-                            />
-                        </Box>
-                        <Box sx={{ p: 2, border: '1px solid red' }} className='layout-page'  >
-                            <NavbarUser />
+                    <div className="app"  >
+                
+                        <SideBar
+                         isSidebar={isSidebar} 
+                        />
 
-                            {/* paginas */}
-                            <Box className="content-wrapper">
-                                <Box className="container-xxl flex-grow-1 container-p-y">
-
-                                    <PerfectScrollbar>
-                                        <MyRoutes />
-                                    </PerfectScrollbar>
-                                </Box>
+                        <main className="content">
+                            <Box sx={{ p: 2 }}>
+                                <Topbar />
                             </Box>
+                            <Box  className="container-xxl flex-grow-1 container-p-y">
 
-                        </Box>
+                                     <MyRoutes />
+{/*  
+                                <PerfectScrollbar>
+                                    <MyRoutes />
+                                </PerfectScrollbar> */}
+                            </Box>
+                        </main>
+                    </div>
 
-                    </BrowserRouter>
+                    <Footer />
+
                 </ThemeProvider>
             </ThemeContext.Provider>
         </>

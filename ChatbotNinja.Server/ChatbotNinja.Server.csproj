@@ -13,10 +13,13 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>8.*-*</Version>
     </PackageReference>
+    <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ChabotNinja.DataAccess\ChatbotNinja.DataAccess.csproj" />
+    <ProjectReference Include="..\ChatbotNinja.Application\ChatbotNinja.Application.csproj" />
     <ProjectReference Include="..\chatbotninja.client\chatbotninja.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

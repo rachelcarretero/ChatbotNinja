@@ -1,81 +1,147 @@
-// modules 
-import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { useState } from "react";
+import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
+import "react-pro-sidebar/dist/css/styles.css";
+import { Link } from "react-router-dom";
+import { tokens } from "../theme";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { Box } from '@mui/material';
-
-// styles
-
-import styled from "styled-components"
 import logo from "../assets/branding/chatbot_titulo.png"
-import { v } from "../styles/Variables";
+import user from "../assets/images/usericon.png"
+import "../styles/chatbot.css"
+// TODO CHECK ICONS !
 import {
     AiOutlineLeft,
     AiOutlineHome,
     AiOutlineApartment,
     AiOutlineSetting,
 } from "react-icons/ai";
+import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 
-import { ThemeContext } from "../App";
-import { Container } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function SideBar({ sidebarOpen, setSidebarOpen }) {
-    const ModSidebaropen = () => {
-        setSidebarOpen(!sidebarOpen);
-    };
-    const { setTheme, theme } = useContext(ThemeContext);
-    const CambiarTheme = () => {
-        setTheme((theme) => (theme === "light" ? "dark" : "light"));
-    };
+const Item = ({ title, to, icon, selected, setSelected }) => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    return (
+        <MenuItem
+            active={selected === title}
+            style={{
+                color: colors.grey[100],
+            }}
+            onClick={() => setSelected(title)}
+            icon={icon}
+        >
+            <Typography>{title}</Typography>
+            <Link to={to} />
+        </MenuItem>
+    );
+};
 
-    return <>
 
-          
- 
-            <button className="layout-menu-toggle menu-link text-large ms-auto" onClick={ModSidebaropen}>
-                <AiOutlineLeft />
-            </button>
-            <div className="app-brand demo">
-                <a href="/" className="app-brand-link">
-                    <span className="app-brand-logo demo">
-                        <img src={logo} alt="ChatbotNinja" />
-                    </span>
-                </a>
-            </div>
+export function SideBar() {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [selected, setSelected] = useState("Dashboard");
 
-            <ul className="menu-inner py-1 ps ps--active-y">
-                {linksArray.map(({ icon, label, to }) => (
-                    <li className="menu-item"      key={label}>
-                        <NavLink
-                            to={to}
-                            className={({ isActive }) => `menu-link${isActive ? ` active` : ``}`}
-                        >
-                            <div className="menu-icon bx bx-target-lock">{icon}</div>
-                            {sidebarOpen && <span>{label}</span>}
-                        </NavLink>
-                    </li>
-                ))}
-            </ul>
-            <Divider />
-            <ul className="menu-inner py-1 ps ps--active-y">
-            {secondarylinksArray.map(({ icon, label, to }) => (
-                <div className="menu-item" key={label}>
-                    <NavLink
-                        to={to}
-                        className={({ isActive }) => `menu-link${isActive ? ` active` : ``}`}
+    return (
+        <Box
+            sx={{
+                "& .pro-sidebar-inner": {
+                    background: `#fff !important`,
+                },
+                "& .pro-icon-wrapper": {
+                    backgroundColor: "transparent !important",
+                },
+                "& .pro-inner-item": {
+                    padding: "5px 35px 5px 20px !important",
+                },
+                "& .pro-inner-item:hover": {
+                    color: "#868dfb !important",
+                },
+                "& .pro-menu-item.active": {
+                    color: "#6870fa !important",
+                } 
+              
+            }}
+        >
+            <ProSidebar collapsed={isCollapsed}>
+
+                <Menu iconShape="square">
+                    {/* LOGO AND MENU ICON */}
+                    <MenuItem
+                        onClick={() => setIsCollapsed(!isCollapsed)}
+                        icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+                        style={{
+                            margin: "10px 0 20px 0",
+                            color: colors.grey[100],
+                        }}
                     >
-                        <div className="menu-icon bx bx-target-lock">{icon}</div>
-                        {sidebarOpen && <span>{label}</span>}
-                    </NavLink>
-                </div>
-            ))}
-            </ul>
-            
-        
-        
-    </>
+                        {!isCollapsed && (
+                            <Box
+                                display="flex"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                ml="15px"
+                            >
+                                <Box className="app-brand demo">
+                                    <span className="app-brand-logo demo">
+                                        <img src={logo} alt="ChatbotNinja" />
+                                    </span>
+                                </Box>
+
+
+                                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                                    <MenuOutlinedIcon />
+                                </IconButton>
+                            </Box>
+                        )}
+                    </MenuItem>
+
+                    {!isCollapsed && (
+                        <Box mb="25px">
+                            <Box display="flex" justifyContent="center" alignItems="center">
+                                <img src={user} alt="user" width="50px" height="50px" style={{ cursor: "pointer", borderRadius: "50%" }} />
+                            </Box>
+                            <Box textAlign="center">
+                                <Typography
+                                    variant="h6"
+                                    color={colors.grey[100]}
+                                    fontWeight="bold"
+                                    sx={{ m: "10px 0 0 0" }}
+                                >
+                                    Rachel
+                                </Typography>
+                            </Box>
+                        </Box>
+                    )}
+
+
+                </Menu>
+
+                {/* ITEMS */}
+                <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+
+                    {linksArray.map(({ icon, label, to }) => (
+                        <li className="menu-item" key={label}>
+                            <NavLink
+                                to={to}
+                                className={({ isActive }) => `menu-link${isActive ? ` active` : ``}`}
+                            >
+                                <div className="menu-icon bx bx-target-lock">{icon}</div>
+                                {!isCollapsed && <span>{label}</span>}
+                            </NavLink>
+                        </li>
+                    ))}
+                </Box>
+
+
+
+            </ProSidebar>
+        </Box>
+    );
 }
+
 
 //#region Data links
 const linksArray = [
@@ -99,7 +165,7 @@ const linksArray = [
         icon: <MdOutlineAnalytics />,
         to: "/personalitiesandtrails",
     },
- 
+
     {
         label: "Instructions",
         icon: <MdOutlineAnalytics />,
@@ -125,9 +191,3 @@ const secondarylinksArray = [
 ];
 //#endregion
 
-const Divider = styled.div`
-  height: 1px;
-  width: 100%;
-  background: ${(props) => props.theme.bg3};
-  margin: ${v.lgSpacing} 0;
-`;

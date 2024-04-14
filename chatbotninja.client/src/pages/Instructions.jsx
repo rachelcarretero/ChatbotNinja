@@ -15,10 +15,11 @@ export function Instructions() {
   return (
 
     <Box>
-
-      <h4 id="tabelLabel">Instructions</h4>
-      <p>Lista Chatbots</p>
- 
+     <HeaderBar
+        title="Instructions"
+        subtitle="Lista Instructions"
+      />
+  
       <div className='container '>
 
         

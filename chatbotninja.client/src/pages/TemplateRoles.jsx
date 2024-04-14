@@ -15,9 +15,11 @@ export function TemplateRoless() {
   return (
 
     <Box>
-
-      <h4 id="tabelLabel">Template Roles</h4>
-      <p>Lista templates</p>
+    <HeaderBar
+        title="Template Roles"
+        subtitle="Lista Template"
+      />
+  
  
       <div className='container '>
 

@@ -1,0 +1,128 @@
+a{
+  text-decoration: none;
+}
+.app-brand {
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  line-height: 1;
+  min-height: 1px;
+  align-items: center;
+}
+
+.app-brand-link {
+  display: flex;
+  align-items: center;
+}
+
+.app-brand-logo {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  min-height: 1px;
+  width: 100%;
+}
+
+.app-brand-logo img,
+.app-brand-logo svg {
+  display: block;
+
+}
+
+@supports(object-fit: cover) {
+  .app-brand-logo img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.app-brand-text {
+  flex-shrink: 0;
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.pro-sidebar-inner {
+  background-color: #ffffff !important;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item>.pro-inner-item {
+  padding: 5px;
+}
+
+/* menu test */
+
+.menu-item,
+.menu-block {
+  flex: 0 0 auto;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-icon {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+.menu-item .menu-link {
+  margin: 0rem 1rem;
+  padding: 0.4rem 1rem;
+
+}
+ 
+.menu-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  margin: 0;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+.menu-link active{
+  background-color: #fff !important;
+  color: #697a8d;
+  border-radius: 3px;
+}
+
+.menu-item.disabled .menu-link {
+  cursor: not-allowed !important;
+}
+
+.menu:not(.menu-no-animation) .menu-link {
+  transition-duration: 0.3s;
+  transition-property: color, background-color;
+}
+
+.menu-link> :not(.menu-icon) {
+  flex: 0 1 auto;
+  opacity: 1;
+}
+
+.menu:not(.menu-no-animation) .menu-link> :not(.menu-icon) {
+  transition: opacity 0.3s ease-in-out;
+}
+
+  
+ 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  height: 100vh;
+}
+
+.container img {
+  width: 50%;
+}
+.content{
+  background-color: #fafafa;
+}

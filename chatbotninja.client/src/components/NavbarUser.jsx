@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, NavItem } from "react-bootstrap";
-import '../styles/themedefault.css';
+import '../styles/chatbot.css';
 
 class NavbarUser extends React.Component {
   render() {

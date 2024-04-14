@@ -15,9 +15,10 @@ export function Characters() {
   return (
 
     <Box>
-
-      <h4 id="tabelLabel">Characters</h4>
-      <p>Lista Chatbots</p>
+     <HeaderBar
+        title="Characters"
+        subtitle="Lista Chatbots"
+      />
  
       <div className='container '>
  
