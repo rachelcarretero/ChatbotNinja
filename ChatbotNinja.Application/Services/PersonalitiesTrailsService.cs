@@ -14,14 +14,14 @@ using ChatbotNinja.Core.Entities;
 
 namespace ChatbotNinja.Application.Services
 {
-    public class PersonalitiesService : BaseService, IPersonalitiesTrailsService
+    public class PersonalitiesTrailsService : BaseService, IPersonalitiesTrailsService
     {
         #region CONSTRUCTOR
         // guid dummy temp 
         public static Guid UserDummyId = new Guid("14653061-a874-4176-a526-131e3f657892");
-        private readonly IPersonalitiesTrailsRepository _repositoryPersonalitys;
+        private readonly IPersonalitiesRepository _repositoryPersonalitys;
 
-        public PersonalitiesService(IMapper mapper, IPersonalitiesTrailsRepository repositoryPersonalitys) : base(mapper)
+        public PersonalitiesTrailsService(IMapper mapper, IPersonalitiesRepository repositoryPersonalitys) : base(mapper)
         {
             _repositoryPersonalitys = repositoryPersonalitys;
         }
@@ -29,19 +29,14 @@ namespace ChatbotNinja.Application.Services
 
         public async Task<PersonalityTrailDto> GetById(int id)
         {
-            var result = _mapper.Map<PersonalityTrail, PersonalityTrailDto>(_repositoryPersonalitys.GetById(id));
+            var result = _mapper.Map<Personality, PersonalityTrailDto>(_repositoryPersonalitys.GetById(id));
             return result;
         }
 
-        public async Task<PersonalityTrailDto> GetByCharacterId(Guid id)
-        {
-            var result = _mapper.Map<PersonalityTrail, PersonalityTrailDto>(_repositoryPersonalitys.GetByCharacterId(id));
-            return result;
-        }
-
+   
         public async Task<List<PersonalityTrailDto>> List()
         {
-            var result = _mapper.Map<List<PersonalityTrail>, List<PersonalityTrailDto>>(_repositoryPersonalitys.List());
+            var result = _mapper.Map<List<Personality>, List<PersonalityTrailDto>>(_repositoryPersonalitys.List());
             return result;
 
         }
@@ -49,7 +44,7 @@ namespace ChatbotNinja.Application.Services
         {
             try
             {
-                var item = _mapper.Map<PersonalityTrailDto, PersonalityTrail>(dto);
+                var item = _mapper.Map<PersonalityTrailDto, Personality>(dto);
 
 
                 // modificamos en negocio, aunque con sesión debiera venir informado en el dto.
@@ -58,7 +53,7 @@ namespace ChatbotNinja.Application.Services
 
 
                 var newchar = _repositoryPersonalitys.CreateReturn(item);
-                return _mapper.Map<PersonalityTrail, PersonalityTrailDto>(newchar);
+                return _mapper.Map<Personality, PersonalityTrailDto>(newchar);
 
             }
             catch (Exception ex)
@@ -74,7 +69,7 @@ namespace ChatbotNinja.Application.Services
         {
             try
             {
-                var item = _mapper.Map<PersonalityTrailDto, PersonalityTrail>(dto);
+                var item = _mapper.Map<PersonalityTrailDto, Personality>(dto);
 
                 // modificamos en negocio, aunque con sesión debiera venir informado en el dto.
                 item.ModifiedByUserId = UserDummyId;
@@ -108,7 +103,15 @@ namespace ChatbotNinja.Application.Services
             }
         }
 
+        public Task<PersonalityTrailDto> GetByCharacterId(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<PersonalityTrailDto> GetByCharacterId(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

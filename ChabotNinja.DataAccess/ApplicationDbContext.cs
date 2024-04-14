@@ -45,6 +45,17 @@ namespace ChatbotNinja.DataAccess
                 perso.HasMany(p => p.PersonalityInstructions);
             });
 
+            modelBuilder.Entity<PersonalityTrail>(perso =>
+            {
+                perso.ToTable("PersonalitiesTrails");
+
+                perso.Property(l => l.DeletedAt).HasColumnType("date");
+                perso.Property(l => l.CreatedAt).HasColumnType("date");
+                perso.Property(l => l.ModifiedAt).HasColumnType("date");
+
+                //perso.HasOne(p => p.Character);
+            });
+
             modelBuilder.Entity<TemplateRole>(role =>
             {
                 role.ToTable("TemplateRoles");
@@ -74,6 +85,8 @@ namespace ChatbotNinja.DataAccess
         }
         public DbSet<Character> Characters { get; set; }
         public DbSet<Personality> Personalities { get; set; }
+        public DbSet<PersonalityTrail> PersonalitiesTrails { get; set; }
+
         public DbSet<Instruction> Instructions { get; set; }
         public DbSet<TemplateRole> TemplatesRoles { get; set; }
         public new async Task<int> SaveChanges()

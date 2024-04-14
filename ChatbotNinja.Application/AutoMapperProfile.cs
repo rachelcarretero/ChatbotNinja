@@ -14,6 +14,15 @@ namespace ChatbotNinja.Application
 
             CreateMap<Personality, PersonalityDto>();
             CreateMap<PersonalityDto, Personality>();
+
+            CreateMap<PersonalityTrail, PersonalityTrailDto>();
+            CreateMap<PersonalityTrailDto, PersonalityTrail>();
+
+            CreateMap<TemplateRole, TemplateRoleDto>();
+            CreateMap<PersonalityTrailDto, TemplateRole>();
+
+            CreateMap<PersonalityTrail, PersonalityTrailDto>();
+            CreateMap<PersonalityTrailDto, PersonalityTrail>();
         }
     }
  

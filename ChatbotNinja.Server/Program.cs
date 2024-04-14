@@ -33,11 +33,15 @@ try
     // Add services to the container.
     builder.Services.AddScoped<ICharactersService, CharactersService>();
     builder.Services.AddScoped<IPersonalitiesService, PersonalitiesService>();
-
+    builder.Services.AddScoped<ICharactersService, CharactersService>();
+    builder.Services.AddScoped<IPersonalitiesService, PersonalitiesService>();
 
     // repositories
     builder.Services.AddScoped<ICharactersRepository, CharactersRepository>();
     builder.Services.AddScoped<IPersonalitiesRepository, PersonalitiesRepository>();
+    builder.Services.AddScoped<ICharactersRepository, CharactersRepository>();
+    builder.Services.AddScoped<IPersonalitiesRepository, PersonalitiesRepository>();
+
 
 
 

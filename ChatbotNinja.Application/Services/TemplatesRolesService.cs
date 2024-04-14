@@ -11,45 +11,49 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ChatbotNinja.Core.Entities;
+using ChatbotNinja.DataAccess.Repositories;
 
 namespace ChatbotNinja.Application.Services
 {
-    public class PersonalitiesService : BaseService, IPersonalitiesTrailsService
+    public class TemplatesRolesService : BaseService, ITemplatesRolesService
     {
         #region CONSTRUCTOR
         // guid dummy temp 
         public static Guid UserDummyId = new Guid("14653061-a874-4176-a526-131e3f657892");
-        private readonly IPersonalitiesTrailsRepository _repositoryPersonalitys;
+        private readonly ITemplateRolesRepository _repositoryTemplatesRoles;
 
-        public PersonalitiesService(IMapper mapper, IPersonalitiesTrailsRepository repositoryPersonalitys) : base(mapper)
+        public TemplatesRolesService(IMapper mapper, ITemplateRolesRepository repositoryTemplatesRoles) : base(mapper)
         {
-            _repositoryPersonalitys = repositoryPersonalitys;
+            _repositoryTemplatesRoles = repositoryTemplatesRoles;
         }
         #endregion
 
-        public async Task<PersonalityTrailDto> GetById(int id)
+        public async Task<TemplateRoleDto> GetById(int id)
         {
-            var result = _mapper.Map<PersonalityTrail, PersonalityTrailDto>(_repositoryPersonalitys.GetById(id));
+            var result = _mapper.Map<TemplateRole, TemplateRoleDto>(_repositoryTemplatesRoles.GetById(id));
             return result;
         }
 
-        public async Task<PersonalityTrailDto> GetByCharacterId(Guid id)
+ 
+        public async Task<List<TemplateRoleDto>> List()
         {
-            var result = _mapper.Map<PersonalityTrail, PersonalityTrailDto>(_repositoryPersonalitys.GetByCharacterId(id));
-            return result;
-        }
-
-        public async Task<List<PersonalityTrailDto>> List()
-        {
-            var result = _mapper.Map<List<PersonalityTrail>, List<PersonalityTrailDto>>(_repositoryPersonalitys.List());
+            var result = _mapper.Map<List<TemplateRole>, List<TemplateRoleDto>>(_repositoryTemplatesRoles.List());
             return result;
 
         }
-        public async Task<PersonalityTrailDto> Create(PersonalityTrailDto dto)
+        public Task<List<TemplateRoleDto>> ListByCharacterId(Guid id)
+        {
+            //var result = _mapper.Map<List<TemplateRole>, List<TemplateRoleDto>>(_repositoryTemplatesRoles.ListByCharacterId(id).ToList());
+            //return result;
+            throw new NotImplementedException();
+
+        }
+
+        public async Task<TemplateRoleDto> Create(TemplateRoleDto dto)
         {
             try
             {
-                var item = _mapper.Map<PersonalityTrailDto, PersonalityTrail>(dto);
+                var item = _mapper.Map<TemplateRoleDto, TemplateRole>(dto);
 
 
                 // modificamos en negocio, aunque con sesión debiera venir informado en el dto.
@@ -57,8 +61,8 @@ namespace ChatbotNinja.Application.Services
                 item.CreatedAt = DateTime.Now;
 
 
-                var newchar = _repositoryPersonalitys.CreateReturn(item);
-                return _mapper.Map<PersonalityTrail, PersonalityTrailDto>(newchar);
+                var newchar = _repositoryTemplatesRoles.CreateReturn(item);
+                return _mapper.Map<TemplateRole, TemplateRoleDto>(newchar);
 
             }
             catch (Exception ex)
@@ -70,17 +74,17 @@ namespace ChatbotNinja.Application.Services
             }
         }
 
-        public async Task Update(PersonalityTrailDto dto)
+        public async Task Update(TemplateRoleDto dto)
         {
             try
             {
-                var item = _mapper.Map<PersonalityTrailDto, PersonalityTrail>(dto);
+                var item = _mapper.Map<TemplateRoleDto, TemplateRole>(dto);
 
                 // modificamos en negocio, aunque con sesión debiera venir informado en el dto.
                 item.ModifiedByUserId = UserDummyId;
                 item.ModifiedAt = DateTime.Now;
 
-                _repositoryPersonalitys.Update(item);
+                _repositoryTemplatesRoles.Update(item);
 
             }
             catch (Exception ex)
@@ -94,12 +98,12 @@ namespace ChatbotNinja.Application.Services
         {
             try
             {
-                var item =  _repositoryPersonalitys.GetById(id);
+                var item =  _repositoryTemplatesRoles.GetById(id);
 
                 item.Active = false;
                 item.DeletedByUserId = UserDummyId;
                 item.DeletedAt = DateTime.Now;
-                _repositoryPersonalitys.Delete(item);
+                _repositoryTemplatesRoles.Delete(item);
             }
             catch (Exception ex)
             {
@@ -109,6 +113,10 @@ namespace ChatbotNinja.Application.Services
         }
 
 
+        public Task<TemplateRoleDto> Create(PersonalityDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
