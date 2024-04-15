@@ -9,20 +9,21 @@ namespace ChatbotNinja.Application
     {
         public AutoMapperProfile()
         {
-            CreateMap<Character, CharacterDto>();
-            CreateMap<CharacterDto, Character>();
+     
+            CreateMap<CharacterDto, Character>().ReverseMap();
+            CreateMap<IQueryable<CharacterDto>, IQueryable<Character>>().ReverseMap();
 
-            CreateMap<Personality, PersonalityDto>();
-            CreateMap<PersonalityDto, Personality>();
+            CreateMap<PersonalityDto, Personality>().ReverseMap();
+            CreateMap<IQueryable<PersonalityDto>, IQueryable<Personality>>().ReverseMap();
 
-            CreateMap<PersonalityTrail, PersonalityTrailDto>();
-            CreateMap<PersonalityTrailDto, PersonalityTrail>();
+            CreateMap<PersonalityTrailDto, PersonalityTrail>().ReverseMap();
+            CreateMap<IQueryable<PersonalityTrailDto>, IQueryable<PersonalityTrail>>().ReverseMap();
 
-            CreateMap<TemplateRole, TemplateRoleDto>();
-            CreateMap<PersonalityTrailDto, TemplateRole>();
+            CreateMap<TemplateRoleDto, TemplateRole>().ReverseMap();
+            CreateMap<IQueryable<TemplateRoleDto>, IQueryable<TemplateRole>>().ReverseMap();
 
-            CreateMap<PersonalityTrail, PersonalityTrailDto>();
-            CreateMap<PersonalityTrailDto, PersonalityTrail>();
+            CreateMap<InstructionDto, Instruction>().ReverseMap();
+            CreateMap<IQueryable<InstructionDto>, IQueryable<Instruction>>().ReverseMap();
         }
     }
  

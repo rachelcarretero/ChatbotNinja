@@ -13,7 +13,7 @@ namespace ChatbotNinja.Application.Services
         Task<List<TemplateRoleDto>> ListByCharacterId(Guid id);
 
         Task<TemplateRoleDto> GetById(int id);
-        Task<TemplateRoleDto> Create(PersonalityDto dto);
+        Task<TemplateRoleDto> Create(TemplateRoleDto dto);
         Task Update(TemplateRoleDto dto);
         Task Delete(int id);
     }

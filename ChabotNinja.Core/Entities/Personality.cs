@@ -31,7 +31,7 @@ namespace ChatbotNinja.Core.Entities
         public virtual Character Character { get; set; }
         public virtual IEnumerable<Instruction> PersonalityInstructions { get; set; }
 
-        public virtual ICollection<PersonalityTrail> PersonalityTrails { get; set; } = new List<PersonalityTrail>();
+        public virtual IEnumerable<PersonalityTrail> PersonalityTrails { get; set; } = new List<PersonalityTrail>();
 
 
 

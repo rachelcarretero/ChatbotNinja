@@ -19,9 +19,9 @@ namespace ChatbotNinja.Application.Services
         #region CONSTRUCTOR
         // guid dummy temp 
         public static Guid UserDummyId = new Guid("14653061-a874-4176-a526-131e3f657892");
-        private readonly IPersonalitiesRepository _repositoryPersonalitys;
+        private readonly IPersonalitiesTrailsRepository _repositoryPersonalitys;
 
-        public PersonalitiesTrailsService(IMapper mapper, IPersonalitiesRepository repositoryPersonalitys) : base(mapper)
+        public PersonalitiesTrailsService(IMapper mapper, IPersonalitiesTrailsRepository repositoryPersonalitys) : base(mapper)
         {
             _repositoryPersonalitys = repositoryPersonalitys;
         }
@@ -29,14 +29,14 @@ namespace ChatbotNinja.Application.Services
 
         public async Task<PersonalityTrailDto> GetById(int id)
         {
-            var result = _mapper.Map<Personality, PersonalityTrailDto>(_repositoryPersonalitys.GetById(id));
+            var result = _mapper.Map<PersonalityTrail, PersonalityTrailDto>(_repositoryPersonalitys.GetById(id));
             return result;
         }
 
    
         public async Task<List<PersonalityTrailDto>> List()
         {
-            var result = _mapper.Map<List<Personality>, List<PersonalityTrailDto>>(_repositoryPersonalitys.List());
+            var result = _mapper.Map<List<PersonalityTrail>, List<PersonalityTrailDto>>(_repositoryPersonalitys.List());
             return result;
 
         }
@@ -44,7 +44,7 @@ namespace ChatbotNinja.Application.Services
         {
             try
             {
-                var item = _mapper.Map<PersonalityTrailDto, Personality>(dto);
+                var item = _mapper.Map<PersonalityTrailDto, PersonalityTrail>(dto);
 
 
                 // modificamos en negocio, aunque con sesión debiera venir informado en el dto.
@@ -53,7 +53,7 @@ namespace ChatbotNinja.Application.Services
 
 
                 var newchar = _repositoryPersonalitys.CreateReturn(item);
-                return _mapper.Map<Personality, PersonalityTrailDto>(newchar);
+                return _mapper.Map<PersonalityTrail, PersonalityTrailDto>(newchar);
 
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace ChatbotNinja.Application.Services
         {
             try
             {
-                var item = _mapper.Map<PersonalityTrailDto, Personality>(dto);
+                var item = _mapper.Map<PersonalityTrailDto, PersonalityTrail>(dto);
 
                 // modificamos en negocio, aunque con sesión debiera venir informado en el dto.
                 item.ModifiedByUserId = UserDummyId;

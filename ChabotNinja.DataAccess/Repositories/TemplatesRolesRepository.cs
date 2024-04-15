@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatbotNinja.DataAccess.Repositories
 {
-    public class TemplatesRolesRepository : BaseRepository<TemplateRole, int>, ITemplateRolesRepository
+    public class TemplatesRolesRepository : BaseRepository<TemplateRole, int>, ITemplatesRolesRepository
     { 
         private readonly ApplicationDbContext _contexto;
         public TemplatesRolesRepository(ApplicationDbContext contexto) : base(contexto)

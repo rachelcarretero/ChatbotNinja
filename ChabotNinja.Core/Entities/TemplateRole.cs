@@ -30,7 +30,7 @@ namespace ChatbotNinja.Core.Entities
 
         [ForeignKey("CharacterId")]
         [InverseProperty("TemplatesRoles")]
-        public virtual ICollection<Character> Characters { get; set; } = new List<Character>();
-        public virtual IEnumerable<Instruction> PersonalityInstructions { get; set; }
+        public virtual IEnumerable<Character>? Characters { get; set; }
+        public virtual IEnumerable<Instruction>? PersonalityInstructions { get; set; }
     }
 }

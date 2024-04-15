@@ -20,9 +20,9 @@ namespace ChatbotNinja.Application.Services
         #region CONSTRUCTOR
         // guid dummy temp 
         public static Guid UserDummyId = new Guid("14653061-a874-4176-a526-131e3f657892");
-        private readonly ITemplateRolesRepository _repositoryTemplatesRoles;
+        private readonly ITemplatesRolesRepository _repositoryTemplatesRoles;
 
-        public TemplatesRolesService(IMapper mapper, ITemplateRolesRepository repositoryTemplatesRoles) : base(mapper)
+        public TemplatesRolesService(IMapper mapper, ITemplatesRolesRepository repositoryTemplatesRoles) : base(mapper)
         {
             _repositoryTemplatesRoles = repositoryTemplatesRoles;
         }
@@ -41,12 +41,11 @@ namespace ChatbotNinja.Application.Services
             return result;
 
         }
-        public Task<List<TemplateRoleDto>> ListByCharacterId(Guid id)
+        public async Task<List<TemplateRoleDto>> ListByCharacterId(Guid id)
         {
-            //var result = _mapper.Map<List<TemplateRole>, List<TemplateRoleDto>>(_repositoryTemplatesRoles.ListByCharacterId(id).ToList());
-            //return result;
-            throw new NotImplementedException();
-
+            var result = _mapper.Map<List<TemplateRole>, List<TemplateRoleDto>>(_repositoryTemplatesRoles.ListByCharacterId(id).ToList());
+            return result;
+ 
         }
 
         public async Task<TemplateRoleDto> Create(TemplateRoleDto dto)
@@ -113,10 +112,6 @@ namespace ChatbotNinja.Application.Services
         }
 
 
-        public Task<TemplateRoleDto> Create(PersonalityDto dto)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 

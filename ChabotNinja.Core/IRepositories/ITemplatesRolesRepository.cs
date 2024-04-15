@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChatbotNinja.Core.IRepositories
 {
-    public interface ITemplateRolesRepository : IBaseRepository<TemplateRole, int>
+    public interface ITemplatesRolesRepository : IBaseRepository<TemplateRole, int>
     {
 
         List<TemplateRole> ListByCharacterId(Guid id);

@@ -9,7 +9,7 @@ namespace ChatbotNinja.Contracts.Dtos
 {
     public class TemplateRoleDto
     {
-        public int PersonalityId { get; set; }
+        public int TemplateRoleId { get; set; }
 
         [Required]
         [StringLength(150)]
@@ -20,7 +20,6 @@ namespace ChatbotNinja.Contracts.Dtos
         public string Description { get; set; }
 
         public bool Active { get; set; }
-
 
     }
 }
