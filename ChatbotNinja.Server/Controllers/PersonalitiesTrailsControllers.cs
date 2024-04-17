@@ -16,9 +16,9 @@ namespace ChatbotNinja.Server.Controllers
 
         #region attributes + constructor
         private readonly ApplicationDbContext _context;
-        private readonly IPersonalitiesService _personalityService;
+        private readonly IPersonalitiesTrailsService _personalityService;
 
-        public PersonalitiesTrailsController(ApplicationDbContext context, IPersonalitiesService personalitysService)
+        public PersonalitiesTrailsController(ApplicationDbContext context, IPersonalitiesTrailsService personalitysService)
         {
             _context = context;
             _personalityService = personalitysService;
@@ -30,14 +30,14 @@ namespace ChatbotNinja.Server.Controllers
 
         // GET: api/personalities/listall
         [HttpGet("ListAll")]
-        public async Task<ActionResult<IEnumerable<PersonalityDto>>> ListAll()
+        public async Task<ActionResult<IEnumerable<PersonalityTrailDto>>> ListAll()
         {
             return await _personalityService.List();
         }
 
         // GET: api/Personality/GetById/5sad-asdf-asdf-asdf
         [HttpGet("GetById")]
-        public async Task<ActionResult<PersonalityDto>> GetById(int id)
+        public async Task<ActionResult<PersonalityTrailDto>> GetById(int id)
         {
             var personality = await _personalityService.GetById(id);
 
@@ -57,7 +57,7 @@ namespace ChatbotNinja.Server.Controllers
         [HttpPost("Insert")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Insert([FromBody] PersonalityDto personality)
+        public async Task<IActionResult> Insert([FromBody] PersonalityTrailDto personality)
         {
             var created = await _personalityService.Create(personality);
             return Ok(created);
@@ -67,7 +67,7 @@ namespace ChatbotNinja.Server.Controllers
         [HttpPut("Update")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Update([FromBody] PersonalityDto personality)
+        public async Task<IActionResult> Update([FromBody] PersonalityTrailDto personality)
         {
             await _personalityService.Update(personality);
             return Ok();

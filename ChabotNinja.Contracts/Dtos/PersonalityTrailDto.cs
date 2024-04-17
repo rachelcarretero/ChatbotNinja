@@ -23,6 +23,7 @@ namespace ChatbotNinja.Contracts.Dtos
 
         public bool Active { get; set; }
         public int PersonalityId { get; set; }
+        public virtual PersonalityDto Personality { get; set; }
 
     }
 }
